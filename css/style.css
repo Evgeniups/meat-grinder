@@ -650,15 +650,15 @@ h2.title {
 }
 
 .offer_section.offer3 .benefits_list .benefit_item:nth-child(1):before {
-  background-image: url(../7fh0nf4f.png);
+  background-image: url(../img/benefit_item_01.png);
 }
 
 .offer_section.offer3 .benefits_list .benefit_item:nth-child(2):before {
-  background-image: url(../--myrr0e.png);
+  background-image: url(../img/benefit_item_02.png);
 }
 
 .offer_section.offer3 .benefits_list .benefit_item:nth-child(3):before {
-  background-image: url(../cte784kc.png);
+  background-image: url(../img/benefit_item_03.png);
 }
 
 .products_count {
@@ -683,7 +683,7 @@ h2.title {
 .offer_section .field {
   display: block;
   margin: 0 auto 20px;
-  padding: 0 20px 0 80px;
+  padding: 0 20px;
   width: 400px;
   height: 66px;
   border: 1px solid #e6e6e6;
@@ -702,18 +702,19 @@ h2.title {
   background-color: #fff;
 }
 
-.offer_section .field[name='name'] {
+/* .offer_section .field[name='name'] {
   margin-top: 25px;
-  background-image: url(../fxiokv_p.png);
+  background-image: url(../img/user.png);
   background-position: 23px center;
   background-repeat: no-repeat;
-}
+} */
 
-.offer_section .field[name='phone' minlength='10' maxlength='15'] {
+/* TODO add image */
+/* .offer_section .field[name='phone' minlength='10' maxlength='15'] {
   background-image: url(../uhz9bnh5.png);
   background-position: 20px center;
   background-repeat: no-repeat;
-}
+} */
 
 .offer_section .field::-webkit-input-placeholder {
   opacity: 1;
@@ -781,7 +782,7 @@ h2.title {
   -webkit-border-radius: 50%;
   -moz-border-radius: 50%;
   border-radius: 50%;
-  background: #149cc7 url(../8d6mkzcg.png) no-repeat;
+  background: #149cc7 url(../img/owl-arrows.png) no-repeat;
   position: absolute;
   top: 50%;
   margin-top: -20px;
@@ -1693,7 +1694,7 @@ section .list4 {
   -webkit-border-radius: 50%;
   -moz-border-radius: 50%;
   border-radius: 50%;
-  background: #149cc7 url(../8d6mkzcg.png) no-repeat;
+  background: #149cc7 url(../img/owl-arrows.png) no-repeat;
   position: absolute;
   top: 240px;
 }
@@ -1898,7 +1899,7 @@ section .list4 {
   -webkit-border-radius: 50%;
   -moz-border-radius: 50%;
   border-radius: 50%;
-  background: #149cc7 url(../8d6mkzcg.png) no-repeat;
+  background: #149cc7 url(../img/owl-arrows.png) no-repeat;
   position: absolute;
   top: 50%;
   margin-top: -7px;
@@ -1996,7 +1997,7 @@ section .list4 {
   -webkit-border-radius: 50%;
   -moz-border-radius: 50%;
   border-radius: 50%;
-  background: #333333 url(../8d6mkzcg.png) no-repeat;
+  background: #333333 url(../img/owl-arrows.png) no-repeat;
   position: absolute;
   top: 100px;
 }
@@ -2057,19 +2058,19 @@ section .list4 {
 }
 
 .order_steps_list1 .step_item:nth-child(1):before {
-  background-image: url(../90bw37wb.png);
+  background-image: url(../img/order_steps_01.png);
 }
 
 .order_steps_list1 .step_item:nth-child(2):before {
-  background-image: url(../bj5uiisa.png);
+  background-image: url(../img/order_steps_02.png);
 }
 
 .order_steps_list1 .step_item:nth-child(3):before {
-  background-image: url(../ed_3yupl.png);
+  background-image: url(../img/order_steps_03.png);
 }
 
 .order_steps_list1 .step_item:nth-child(4):before {
-  background-image: url(../h92037lj.png);
+  background-image: url(../img/order_steps_04.png);
 }
 
 .order_steps_list1 .step_item h4 {
