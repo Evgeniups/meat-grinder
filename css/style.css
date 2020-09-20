@@ -24,7 +24,7 @@ section {
 
 section.dark_theme {
   background: #333;
-  color: #fff;
+  /* color: #fff; */
 }
 
 .clearfix:after {
@@ -1078,28 +1078,45 @@ section .list4 {
   display: flex;
   align-items: center;
   position: relative;
+  /* height: 250px; */
 }
 .flex-reverse {
   flex-direction: row-reverse;
+  padding: 15px;
+  justify-self:end;
 }
+.flex-reverse img {
+  /* position: absolute; */
+  bottom: 10px;
+  ali
+  left: 0;
+}
+
 .img_block {
-  flex: 0 0 50%;
+  flex: 1 0 50%;
   position: relative;
   z-index: 2;
+}
+.img_block img {
+  width: 300px;
+  width: 150%;
 }
 .text_block {
   position: relative;
   z-index: 3;
 }
-.text_block p {
+
+.benefit_item  .text_block p {
   color: #fff;
+  font-size: 12px;
+  padding: 0px 10px 0px 0px;
 }
 .bg {
   position: absolute;
   width: 100%;
   bottom: 47px;
   left: 0;
-  height: 100px;
+  height: 120px;
   background-color: #2196f3;
 }
 .benefit_item:nth-child(3) .bg {
@@ -1981,6 +1998,7 @@ section .list4 {
 .reviews4_section {
   padding: 30px 20px 40px;
   /* background: #333333; */
+  color: #000;
 }
 
 .reviews4_section h2 {
@@ -2015,7 +2033,10 @@ section .list4 {
 
 .reviews_list4 .text_block {
   padding: 20px 30px 67px;
+  color: #000;
 }
+      .reviews_list4 .text_block {
+      }
 
 .reviews_list4 .text_block .author_info {
   margin: 0 0 10px;
