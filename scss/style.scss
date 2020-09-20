@@ -1075,62 +1075,135 @@ section .list4 {
 /* benefits 3 */
 
 .benefit_item {
+  p {
+    color: #fff;
+  }
   display: flex;
   align-items: center;
   position: relative;
 }
 .flex-reverse {
-  flex-direction: row-reverse;
-  padding: 15px;
-  justify-self: end;
-}
-.benefit_item .flex-reverse img {
-  /* position: absolute; */
-  bottom: 10px;
-  left: 0;
+  // flex-direction: row-reverse;
+  // padding: 15px;
+  // justify-self: end;
 }
 
-.benefit_item .img_block {
-  flex: 1 0 50%;
-  position: relative;
-  z-index: 2;
-}
+// .benefit_item .img_block {
+//   flex: 1 0 50%;
+//   position: relative;
+//   z-index: 2;
+// }
 .benefit_item .img_block img {
   /* width: 300px; */
   /* width: 200%; */
 }
-.benefit_item .text_block {
-  position: relative;
-  z-index: 3;
-}
+// .benefit_item .text_block {
+//   position: relative;
+//   z-index: 3;
+// }
 
 .benefit_item .text_block p {
-  color: #fff;
-  font-size: 12px;
-  padding: 0px 10px 0px 0px;
+  // color: #fff;
+  // font-size: 12px;
+  // padding: 0px 10px 0px 0px;
 }
 .benefit_item .bg {
-  position: absolute;
-  width: 100%;
-  bottom: 47px;
-  left: 0;
-  height: 120px;
-  background-color: #2196f3;
 }
-.benefit_item:nth-child(3) .bg {
-  left: 0;
-  top: 36px;
-}
+// .benefit_item:nth-child(3) .bg {
+//   left: 0;
+//   top: 36px;
+// }
 
 .benefit_item {
+  .img_block img {
+    position: relative;
+    z-index: 3;
+  }
+  .text_block {
+    position: relative;
+    z-index: 3;
+  }
+  .bg {
+    position: absolute;
+    width: 100%;
+    bottom: 47px;
+    left: 0;
+    height: 120px;
+    background-color: #2196f3;
+    z-index: 1;
+  }
 }
 .item01 {
+  height: 250px;
+  .img_block img {
+    width: 250px;
+    z-index: 2;
+  }
+  .text_block {
+    position: absolute;
+    right: 12px;
+    width: 233px;
+    top: 52px;
+
+    h4 {
+      font-size: 18px;
+    }
+    p {
+      padding: 18px 0px 0px 0px;
+    }
+  }
+  .bg {
+  }
 }
-.img_block {
+
+.item02 {
+  height: 250px;
+  flex-direction: row-reverse;
+  .img_block img {
+    width: 270px;
+    position: absolute;
+    top: 40px;
+    right: -15px;
+  }
+  .text_block {
+    position: absolute;
+    left: 20px;
+    top: 26px;
+    width: 233px;
+
+    h4 {
+      font-size: 18px;
+    }
+    p {
+      padding: 18px 0px 0px 0px;
+    }
+  }
+  .bg {
+  }
 }
-.text_block {
-}
-.bg {
+.item03 {
+  height: 250px;
+  .img_block img {
+    width: 254px;
+    position: absolute;
+    top: 56px;
+    left: -17px;
+  }
+  .text_block {
+    position: absolute;
+    right: 20px;
+    top: 51px;
+    width: 237px;
+
+    h4 {
+      font-size: 18px;
+    }
+    p {
+      padding: 8px 0px 0px 0px;
+    }
+  }
+  .bg {
+  }
 }
 /* 
 .benefits_list3 .benefit_item {
@@ -2109,44 +2182,107 @@ section .list4 {
 }
 
 /* HOW-ORDER */
-.how-order {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.how-order__title {
-}
+// .how-order {
+//   border: 1px solid #000;
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
+// }
+// .how-order__title {
+// }
 
-.how-order__block {
-  width: 360px;
-  margin: 0px auto;
-}
-.how-order__item {
-  display: flex;
-}
+// .how-order__block {
+//   width: 360px;
+//   margin: 0px auto;
+// }
+// .how-order__item {
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+// }
 
-.reverse {
-  flex-direction: row-reverse;
-}
-.how-order__image {
-  flex: 1 1 50%;
-}
-.how-order__image img {
-  margin: 0px auto;
-}
-.how-order__text {
-  align-self: center;
-}
-.how-order__text h2 {
-  font-size: 18px;
-  line-height: 22px;
-  color: #2196f3;
-}
-.how-order__text p {
-  font-size: 12px;
-  line-height: 15px;
-}
+// .reverse {
+//   flex-direction: row-reverse;
+// }
+// .how-order__image {
+//   flex: 1 1 50%;
+// }
+// .how-order__image img {
+//   margin: 0px auto;
+// }
+// .how-order__text {
+//   align-self: center;
+// }
+// .how-order__text h2 {
+//   font-size: 18px;
+//   line-height: 22px;
+//   color: #2196f3;
+// }
+// .how-order__text p {
+//   font-size: 12px;
+//   line-height: 15px;
+// }
 /* HOW-ORDER */
+
+/* HOW */
+.order_steps_section {
+  .how-order__block {
+  }
+  .how-order__item {
+    display: flex;
+    height: 125px;
+    width: 300px;
+    margin: 0px auto;
+  }
+  .how-order__image {
+    width: 150px;
+  }
+  .how-order__text {
+    h2 {
+      font-size: 18px;
+      font-weight: bold;
+      color: #2196f3;
+      transform: translate(0px, 0);
+      opacity: 1;
+    }
+    width: 150px;
+    font-size: 12px;
+    font-weight: 500;
+  }
+
+  .how01 {
+    .how-order__image {
+    }
+    .how-order__text {
+      padding: 10px 0px 0px 0px;
+    }
+  }
+  .how02 {
+    flex-direction: row-reverse;
+    .how-order__image {
+    }
+    .how-order__text {
+      padding: 30px 0px 0px 0px;
+    }
+  }
+  .how03 {
+    .how-order__image {
+      padding: 20px 0px 0px 0px;
+    }
+    .how-order__text {
+      padding: 30px 0px 0px 0px;
+    }
+  }
+  .how04 {
+    flex-direction: row-reverse;
+    .how-order__image {
+    }
+    .how-order__text {
+      padding: 20px 0px 0px 0px;
+    }
+  }
+}
+/* HOW */
 
 .order_steps_list1 .step_item {
   float: left;
