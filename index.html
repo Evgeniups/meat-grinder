@@ -823,12 +823,19 @@ console.log(target.tagName);
             <div class="text"><span>Вы экономите 53%</span></div>
           </div>
         </div>
-        <form
+
+        <!-- <form
           id="order_form"
           class="order_form"
           action="zakaz.php"
           method="post"
           onsubmit="if(this.name.value==''){alert('Введите Ваше имя!');return false}if(this.phone.value==''){alert('Введите Ваш номер телефона!');return false}return true;"
+        > -->
+        <form
+          id="order_form"
+          class="order_form"
+          method="post"
+          action="#popup_2"
         >
           <input
             class="field"
@@ -836,7 +843,6 @@ console.log(target.tagName);
             name="name"
             placeholder="Ваше имя"
             autocomplete="off"
-            required
           />
           <input
             class="field"
@@ -846,7 +852,6 @@ console.log(target.tagName);
             minlength="10"
             maxlength="15"
             placeholder="Ваш телефон"
-            required
           />
 
           <!-- <button class="button popup-link">Купить</button> -->
