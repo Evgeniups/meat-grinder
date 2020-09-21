@@ -2241,23 +2241,27 @@ section .list4 {
     width: 150px;
   }
   .how-order__text {
+    width: 150px;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 14px;
     h2 {
+      padding: 0px 0px 5px 0px;
       font-size: 18px;
       font-weight: bold;
       color: #2196f3;
       transform: translate(0px, 0);
       opacity: 1;
     }
-    width: 150px;
-    font-size: 12px;
-    font-weight: 500;
   }
 
   .how01 {
     .how-order__image {
+      padding: 0px 0px 0px 20px;
+}
     }
     .how-order__text {
-      padding: 10px 0px 0px 0px;
+      padding: 26px 0px 0px 0px;
     }
   }
   .how02 {
@@ -2265,7 +2269,8 @@ section .list4 {
     .how-order__image {
     }
     .how-order__text {
-      padding: 30px 0px 0px 0px;
+      padding: 34px 0px 0px 0px;
+      text-align: right;
     }
   }
   .how03 {
@@ -2273,15 +2278,17 @@ section .list4 {
       padding: 20px 0px 0px 0px;
     }
     .how-order__text {
-      padding: 30px 0px 0px 0px;
+      padding: 38px 0px 0px 0px;
     }
   }
   .how04 {
     flex-direction: row-reverse;
     .how-order__image {
+      padding-left: 10px;
     }
     .how-order__text {
-      padding: 20px 0px 0px 0px;
+      padding: 32px 0px 0px 0px;
+      text-align: right;
     }
   }
 }
