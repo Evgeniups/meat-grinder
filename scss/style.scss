@@ -705,7 +705,7 @@ h2.title {
 
 .offer_section .field {
   display: block;
-  margin: 50px auto 20px;
+  margin: 25px auto 25px;
   padding: 0 20px;
   width: 400px;
   height: 66px;
@@ -2258,40 +2258,40 @@ section .list4 {
   .how01 {
     .how-order__image {
       padding: 0px 0px 0px 20px;
-}
-    }
-    .how-order__text {
-      padding: 26px 0px 0px 0px;
     }
   }
-  .how02 {
-    flex-direction: row-reverse;
-    .how-order__image {
-    }
-    .how-order__text {
-      padding: 34px 0px 0px 0px;
-      text-align: right;
-    }
-  }
-  .how03 {
-    .how-order__image {
-      padding: 20px 0px 0px 0px;
-    }
-    .how-order__text {
-      padding: 38px 0px 0px 0px;
-    }
-  }
-  .how04 {
-    flex-direction: row-reverse;
-    .how-order__image {
-      padding-left: 10px;
-    }
-    .how-order__text {
-      padding: 32px 0px 0px 0px;
-      text-align: right;
-    }
+  .how-order__text {
+    padding: 26px 0px 0px 0px;
   }
 }
+.how02 {
+  flex-direction: row-reverse;
+  .how-order__image {
+  }
+  .how-order__text {
+    padding: 34px 0px 0px 0px;
+    text-align: right;
+  }
+}
+.how03 {
+  .how-order__image {
+    padding: 20px 0px 0px 0px;
+  }
+  .how-order__text {
+    padding: 38px 0px 0px 0px;
+  }
+}
+.how04 {
+  flex-direction: row-reverse;
+  .how-order__image {
+    padding-left: 10px;
+  }
+  .how-order__text {
+    padding: 32px 0px 0px 0px;
+    text-align: right;
+  }
+}
+
 /* HOW */
 
 .order_steps_list1 .step_item {
