@@ -1,374 +1,36 @@
 <!DOCTYPE html>
 <html lang="ru-RU">
   <head>
-    <!-- Facebook Pixel Code -->
-    <script>
-      !(function (f, b, e, v, n, t, s) {
-        if (f.fbq) return
-        n = f.fbq = function () {
-          n.callMethod
-            ? n.callMethod.apply(n, arguments)
-            : n.queue.push(arguments)
-        }
-        if (!f._fbq) f._fbq = n
-        n.push = n
-        n.loaded = !0
-        n.version = '2.0'
-        n.queue = []
-        t = b.createElement(e)
-        t.async = !0
-        t.src = v
-        s = b.getElementsByTagName(e)[0]
-        s.parentNode.insertBefore(t, s)
-      })(
-        window,
-        document,
-        'script',
-        'https://connect.facebook.net/en_US/fbevents.js'
-      )
-      fbq('init', 1385239021645325)
-      fbq('track', 'PageView')
-    </script>
-    <noscript
-      ><img
-        height="1"
-        width="1"
-        style="display: none"
-        src="https://www.facebook.com/tr?id=1385239021645325&ev=PageView&noscript=1"
-    /></noscript>
-    <!-- End Facebook Pixel Code -->
-    <script>
-      function sendData(
-        sendTo,
-        GET_Var,
-        json_obj,
-        changeLocation,
-        timeToOff,
-        land_or_blog,
-        gotopage
-      ) {
-        //оперделяем браузер
-        var ua = navigator.userAgent
-
-        function bName() {
-          if (ua.search(/MSIE/) > -1) return 'ie'
-
-          if (ua.search(/Firefox/) > -1) return 'firefox'
-
-          if (ua.search(/Opera/) > -1) return 'opera'
-
-          if (ua.search(/Chrome/) > -1) return 'chrome'
-
-          if (ua.search(/Safari/) > -1) return 'safari'
-
-          if (ua.search(/Konqueror/) > -1) return 'konqueror'
-
-          if (ua.search(/Iceweasel/) > -1) return 'iceweasel'
-
-          if (ua.search(/SeaMonkey/) > -1) return 'seamonkey'
-        }
-
-        var startTime = new Date().getTime()
-        var timeAfter = startTime + timeToOff
-        var doc = document.body
-        //-------------Start function-------------------
-        //выносим эту переменную которая будет сразу выполнятся при старте скрипта(страницы )
-        var unparseParams = jsonToParametr()
-
-        //----------------------------------
-
-        //проверка передали ли мы время
-        if (timeToOff) {
-          //После времени которое указываем в timeToOff срабатывает отправка
-          var timerOn = setTimeout(function tick() {
-            /*console.log('tick');
-		console.log(startTime);
-		console.log(timeAfter);*/
-
-            if (new Date().getTime() >= timeAfter) {
-              console.log(' DATA SEND ')
-              clearTimeout(timerOn)
-              sendTimeBeforeClose()
-
-              return false
-            }
-
-            timerOn = setTimeout(tick, timeToOff)
-          }, timeToOff)
-        }
-
-        //------------------------------------
-
-        //прикрепляем событие
-        IeOrNormBrowserEvent('beforeunload', sendTimeBeforeClose)
-
-        /*	if(land_or_blog == 'blog'){	
-	console.log('blog');
-	IeOrNormBrowserEvent('click', sendDataOnClick);
-	}else if(land_or_blog == "land"){
-	console.log('land');
-	};*/
-        /*	window.onbeforeunload = function(event){
-		event = event || window.event;
-		var target = event.target || event.srcElement;
-		sendTimeBeforeClose(event);
-	};*/
-
-        if (land_or_blog == 'blog') {
-          console.log('blog')
-          //ГОРИ В АДУ ИЕ!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-          document.onclick = function (event) {
-            event = event || window.event
-            var target = event.target || event.srcElement
-            console.log(target.tagName)
-
-            //проверка является ли родительским элементом А
-            while (target != doc) {
-              if (target.tagName == 'A') {
-                console.log(target.tagName)
-                var probiv = true
-                sendTimeBeforeClose(event, probiv, changeLocation)
-                break
-              }
-              target = target.parentNode
-            }
-            /*if(target.tagName == "A"){
-			console.log(target.tagName);
-			var probiv = true;
-			sendTimeBeforeClose(event,probiv,changeLocation);
-		};*/
-          }
-        } else if (land_or_blog == 'land') {
-          console.log('land')
-        }
-        //функция для события клик
-        //
-        /*function sendDataOnClick(event){
-	console.log('run');
-	event = event || window.event;
-	var target = event.target || event.srcElement;
-
-console.log(target.tagName);
-	  //проверка является ли родительским элементом А
-    while (target != doc) {
-        if (target.tagName == "A"){
-			console.log(target.tagName);
-			var probiv = true;
-			sendTimeBeforeClose(event,probiv,changeLocation);
-          break;
-        };
-      target = target.parentNode;
-    };
-	
-};
-*/
-        //---------------Add Function------------------
-
-        //полифил под обработчик события для гавно-браузера IE и нормальных  браузеров
-        function IeOrNormBrowserEvent(event, func) {
-          //если есть такой метод то юзаем его
-          if (window.addEventListener) {
-            window.addEventListener(event, func)
-          } else {
-            window.attachEvent('on' + event, func)
-          }
-        }
-
-        //---------------------Kill Event----------------
-        //
-        function killEvent(event, func) {
-          if (window.addEventListener) {
-            window.removeEventListener(event, func)
-          } else {
-            window.detachEvent('on' + event, func)
-          }
-        }
-
-        //--------------------------------------
-
-        //возвращает время проведеное на сайте в секундах
-        function calcTimeOnPage() {
-          var timeNow = new Date().getTime()
-          var timeDiff = timeNow - startTime
-          /*var timeInSec = timeDiff/1000;*/
-          return timeDiff
-        }
-
-        //---------------------------------
-
-        //приводим масив с пхп в нормальное состояние
-
-        function jsonToParametr() {
-          var params = ''
-          for (var key in json_obj) {
-            params += '&' + key + '=' + json_obj[key]
-          }
-          //console.log(params);
-          return params
-        }
-
-        //отправка данных на сервер
-        function sendTimeBeforeClose(event, probiv) {
-          //удаляем события
-          killEvent('beforeunload', sendTimeBeforeClose)
-          /*window.onbeforeunload = function(event){
-		
-		};*/
-          document.onclick = function (e) {}
-          /*killEvent('click', sendDataOnClick);*/
-
-          var userTimeOnPage = calcTimeOnPage()
-          var cancel
-          if (userTimeOnPage > 15000) {
-            cancel = 0
-          } else {
-            cancel = 1
-          }
-          if (probiv) {
-            unparseParams +=
-              '&' +
-              GET_Var +
-              '=' +
-              userTimeOnPage +
-              '&probiv=1' +
-              '&cancel=' +
-              cancel
-            probiv = false
-          } else {
-            unparseParams +=
-              '&' +
-              GET_Var +
-              '=' +
-              userTimeOnPage +
-              '&probiv=0' +
-              '&cancel=' +
-              cancel
-          }
-
-          if (arguments[2] && arguments[2] != '') {
-            if (bName() == 'safari') {
-              window.open(gotopage, '_blank')
-              window.location.href = changeLocation
-            } else {
-              /*window.open(gotopage, '_blank');*/
-              window.location.href = changeLocation
-            }
-          }
-
-          var xhr = CreateRequest()
-          //
-
-          unparseParams = unparseParams.replace('&', '?')
-
-          xhr.open('GET', sendTo + unparseParams, false)
-
-          //устанавливаем заголовки
-
-          // для POST
-          /*xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded; charset=utf-8");
-	    //отправляем данные	
-        xhr.send(postVar+"="+userTimeOnPage+"");*/
-
-          // для GET
-          /* xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");*/
-          //для гета тело запроса пустое!
-          xhr.send(null)
-
-          //обнуляем нашу строку параметров. зачем? яхз...чесн
-          /*unparseParams = "";*/
-
-          //или же заместь всего кода с аджаксом юзаем картинку.....
-          //document.write('<img src="index2.php/?'+unparseParams+'">');
-
-          /*event.preventDefault ? event.preventDefault() : (event.returnValue=false);*/
-          /*return true;*/
-        }
-
-        //-------------------------------------
-        //Полифил для аджакса
-        function CreateRequest() {
-          var Request = false
-
-          if (window.XMLHttpRequest) {
-            //Gecko-совместимые браузеры, Safari, Konqueror
-            Request = new XMLHttpRequest()
-          } else if (window.ActiveXObject) {
-            //Internet explorer
-            try {
-              Request = new ActiveXObject('Microsoft.XMLHTTP')
-            } catch (CatchException) {
-              Request = new ActiveXObject('Msxml2.XMLHTTP')
-            }
-          }
-
-          if (!Request) {
-            alert('Невозможно создать XMLHttpRequest')
-          }
-
-          return Request
-        }
-
-        console.log(startTime)
-      }
-    </script>
-
-    <script>
-      // записываем сюда наш обьект который пришел с пхп (предварительно обработан json_encode)
-      var dataPHP = { id: '8217291', lan: '1', region: '', city: '' }
-      // 'index2.php' - 1й аргумент это путь куда будет передан гет массив с ф-ции
-      // 'timeOnPage' - 2й аргумент с каким именем будет приниматься время проведенное на сайте
-      // dataPHP - 3й аргумент передает объект в формате json
-      // 4й аргумент куда будет переадресована страничка при клике на ссылку(для блогов) для лендов указывать пустую строку
-      //5й аргумент время после которого срабытывает отправка данных
-      //6й аргумент 'blog' или 'land' если блог то устанавливаеться событие на клик по ссылке если land то не устанавливается
-      sendData(
-        'http://7leads.biz/api_order/update_stat/',
-        'timeOnPage',
-        dataPHP,
-        '',
-        '',
-        'land'
-      )
-
-      // $('form').attr('action', 'https://script.google.com/macros/s/AKfycbzk_i2A1c_FmfMgGFzj-M9yEfGAhKtacrVahPSO-A/exec');
-      //     function locationHref() {
-      //         return window.location.href;
-      //     }
-      //     $("form").submit(function(e) {
-      //         e.preventDefault();
-
-      //         $.ajax({
-      //             method: $(this).attr('method'),
-      //             url: $(this).attr('action'),
-      //             data: $(this).serialize(),
-      //             datatype: 'json',
-      //             success: function() {
-      //                 window.location.href = locationHref() + 'form-ok.php';
-      //             },
-      //         });
-
-      //     });
-    </script>
-
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
     <title>Мясорубка Meat Grinder</title>
 
     <meta name="viewport" content="width=480" />
-
     <meta name="description" content="Мясорубка электрическая." />
-
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-    <link rel="manifest" href="/site.webmanifest" />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="img/favicon//apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="img/favicon//favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="img/favicon//favicon-16x16.png"
+    />
+    <link rel="manifest" href="img/favicon//site.webmanifest" />
 
     <link rel="stylesheet" type="text/css" href="css/reset.css" />
     <link
       href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
-    <!-- <link rel="stylesheet" type="text/css" href="css/fonts.css" /> -->
     <link rel="stylesheet" type="text/css" href="css/owl.css" />
     <link rel="stylesheet" type="text/css" href="css/style.min.css" />
 
@@ -381,39 +43,17 @@ console.log(target.tagName);
   </head>
   <body class="">
     <div class="main_wrapper">
-      <!-- header 3 -->
-
       <header class="offer_section offer3">
         <div class="title_block">
           <h1 class="main_title">Electric meat grinder</h1>
           <p class="subtitle">Мясорубка электрическая</p>
         </div>
-        <!-- <div class="timer_block clearfix">
-          <p>Это предложение закончится через:</p>
-          <div class="timer clearfix">
-            <div class="timer_item">
-              <div class="text">дней</div>
-              <div class="count">00</div>
-            </div>
-            <div class="timer_item">
-              <div class="text">часов</div>
-              <div class="count hours"><span>0</span><span>8</span></div>
-            </div>
-            <div class="timer_item">
-              <div class="text">минут</div>
-              <div class="count minutes"><span>0</span><span>9</span></div>
-            </div>
-            <div class="timer_item">
-              <div class="text">секунд</div>
-              <div class="count seconds"><span>3</span><span>9</span></div>
-            </div>
-          </div>
-        </div> -->
+
         <div class="image_block">
           <img
             class="offer_image"
             src="img/offer_image.jpg"
-            alt="Мясорубка  Meat Grinder"
+            alt="Мясорубка Meat Grinder"
           />
           <div class="discount_block">
             <div class="value">53%</div>
@@ -446,24 +86,7 @@ console.log(target.tagName);
         <div class="products_count">Осталось<b>7</b>по акции</div>
       </header>
 
-      <!-- /header 3 -->
-
-      <!-- video -->
-
-      <!-- /video -->
-
-      <!-- problems -->
-
-      <!-- /problems -->
-
-      <!-- description -->
-
       <section class="description_section">
-        <!-- <img
-          class="gif_image"
-          src="img/description_image_01.jpg"
-          alt="Мясорубка  Meat Grinder"
-        /> -->
         <h2 class="title _anim-items">
           Мясорубка электрическая - это необходимая вещь на кухне каждой
           хозяйки.
@@ -472,7 +95,7 @@ console.log(target.tagName);
         <img
           class="gif_image"
           src="img/desc-img1.svg"
-          alt="Мясорубка  Meat Grinder"
+          alt="Мясорубка Meat Grinder"
         />
         <p class="text">
           Мясорубка  Meat Grinder - это ваш надёжный напарник и помощник на
@@ -482,7 +105,7 @@ console.log(target.tagName);
         <img
           class="gif_image"
           src="img/desc-img2.svg"
-          alt="Мясорубка  Meat Grinder"
+          alt="Мясорубка Meat Grinder"
         />
         <p class="text">
           Данная модель обладает рядом преимуществ, такими как: высокая
@@ -492,26 +115,15 @@ console.log(target.tagName);
         <img
           class="gif_image"
           src="img/desc-img3.svg"
-          alt="Мясорубка  Meat Grinder"
+          alt="Мясорубка Meat Grinder"
         />
         <p class="text">
            Стильный корпус с элементами из нержавеющего металла и прочного
           пластика придают внешнему виду современности и элегантности. Товар
           поставляется в заводской картонной коробке.
         </p>
-        <!--       
-        <p class="text">
-          Электрическая Мясорубка – это стильный дизайн, высокая степень
-          надежности, большое количество функциональных возможностей, которые
-          делают данную модель незаменимой помощницей и идеальным дополнением
-          любой кухни. Теперь Вы можете готовить с удовольствием и радовать
-          кулинарными шедеврами свою семью.
-        </p> -->
       </section>
 
-      <!-- /description -->
-
-      <!-- feature -->
       <h2 class="title _anim-items">Характеристики</h2>
       <ul class="feature__list _anim-items">
         <li class="feature__item _anim-items anim-right">
@@ -543,17 +155,13 @@ console.log(target.tagName);
           защита от перегрузки
         </li>
       </ul>
-      <!-- /feature -->
-
-      <!-- benefits -->
 
       <section class="benefits_section">
-        <!-- <section class="benefits_section dark_theme"> -->
         <h2 class="title _anim-items">Преимущества</h2>
         <div class="benefits_list3">
           <div class="benefit_item item01">
             <div class="img_block">
-              <img src="img/plus01.png" alt="Мясорубка  Meat Grinder" />
+              <img src="img/plus01.png" alt="Мясорубка Meat Grinder" />
             </div>
             <div class="text_block">
               <h4>Высокое качество</h4>
@@ -566,7 +174,7 @@ console.log(target.tagName);
           </div>
           <div class="benefit_item item02">
             <div class="img_block">
-              <img src="img/plus02.png" alt="Мясорубка  Meat Grinder" />
+              <img src="img/plus02.png" alt="Мясорубка Meat Grinder" />
             </div>
             <div class="text_block">
               <h4>Облегчит и ускорит приготовление</h4>
@@ -581,7 +189,7 @@ console.log(target.tagName);
           <span class="br"></span>
           <div class="benefit_item item03">
             <div class="img_block">
-              <img src="img/plus03.png" alt="Мясорубка  Meat Grinder" />
+              <img src="img/plus03.png" alt="Мясорубка Meat Grinder" />
             </div>
             <div class="text_block">
               <h4>Функциональность</h4>
@@ -593,45 +201,10 @@ console.log(target.tagName);
             </div>
             <div class="bg"></div>
           </div>
-          <!-- <div class="benefit_item">
-            <img src="img/benefits_01.jpg" alt="Мясорубка  Meat Grinder" />
-            <div class="text_block">
-              <h4>Высокое качество</h4>
-              <p>
-                Корпус мясорубки, а также измельчители и сетки изготовлены из
-                высококачественных и экологичных материалов
-              </p>
-            </div>
-          </div>
-          <div class="benefit_item">
-            <img src="img/benefits_02.jpg" alt="Мясорубка  Meat Grinder" />
-            <div class="text_block">
-              <h4>Облегчит и ускорит приготовление</h4>
-              <p>
-                Мощный двигатель 2000Вт сделает все быстро и без труда, вам
-                только нужно убирать готовый фарш на выходе
-              </p>
-            </div>
-          </div>
-          <div class="benefit_item">
-            <img src="img/benefits_03.jpg" alt="Мясорубка  Meat Grinder" />
-            <div class="text_block">
-              <h4>Функциональность</h4>
-              <p>
-                Большое количество функциональных возможностей, делают данную
-                модель незаменимой помощницей и идеальным дополнением любой
-                кухни.
-              </p>
-            </div>
-          </div> -->
         </div>
         <a href="#order_form" class="button">Купить</a>
         <div class="products_count">Осталось<b>7</b>по акции</div>
       </section>
-
-      <!-- /benefits -->
-
-      <!-- reviews 4 -->
 
       <section class="reviews4_section">
         <h2 class="title _anim-items">Отзывы покупателей</h2>
@@ -643,16 +216,11 @@ console.log(target.tagName);
           <div class="review_item">
             <img
               class="photo"
-              src="http://placehold.it/150x200"
-              alt="Мясорубка  Meat Grinder"
+              src="http://placehold.it/360x480"
+              alt="Мясорубка Meat Grinder"
             />
           </div>
           <div class="review_item">
-            <img
-              class="photo"
-              src="img/reviews_01.jpg"
-              alt="Мясорубка  Meat Grinder"
-            />
             <div class="text_block">
               <div class="author_info">Иван Петров</div>
               <p>
@@ -666,8 +234,8 @@ console.log(target.tagName);
           <div class="review_item">
             <img
               class="photo"
-              src="img/reviews_02.jpg"
-              alt="Мясорубка  Meat Grinder"
+              src="http://placehold.it/360x270"
+              alt="Мясорубка Meat Grinder"
             />
             <div class="text_block">
               <div class="author_info">Пётр Иванов</div>
@@ -680,10 +248,6 @@ console.log(target.tagName);
           </div>
         </div>
       </section>
-
-      <!-- /reviews 4 -->
-
-      <!-- order steps 1 -->
 
       <section class="order_steps_section">
         <h2 class="title _anim-items">Как заказать Мясорубку?</h2>
@@ -725,29 +289,8 @@ console.log(target.tagName);
             </div>
           </div>
         </div>
-        <!-- <div class="order_steps_list1 clearfix">
-          <div class="step_item">
-            <h4>Заявка</h4>
-            <p>Оставляете заявку на&nbsp;нашем сайте</p>
-          </div>
-          <div class="step_item">
-            <h4>Звонок</h4>
-            <p>Менеджер уточняет детали заказа</p>
-          </div>
-          <div class="step_item">
-            <h4>Отправка</h4>
-            <p>Доставляем заказ в течение 1-3 дня</p>
-          </div>
-          <div class="step_item">
-            <h4>Получение</h4>
-            <p>Оплачиваете при получении на почте</p>
-          </div>
-        </div> -->
       </section>
 
-      <!-- /order steps 1 -->
-
-      <!-- present section -->
       <section class="present">
         <div class="present__title">
           <h3>КУХОННЫЕ ВЕСЫ</h3>
@@ -768,39 +311,18 @@ console.log(target.tagName);
           </div>
         </div>
       </section>
-      <!-- present section -->
 
       <section class="offer_section offer3">
         <div class="title_block">
           <h3 class="main_title">Electric meat grinder</h3>
           <p class="subtitle">Мясорубка электрическая</p>
         </div>
-        <!-- <div class="timer_block clearfix">
-          <p>Это предложение закончится через:</p>
-          <div class="timer clearfix">
-            <div class="timer_item">
-              <div class="text">дней</div>
-              <div class="count">00</div>
-            </div>
-            <div class="timer_item">
-              <div class="text">часов</div>
-              <div class="count hours"><span>0</span><span>8</span></div>
-            </div>
-            <div class="timer_item">
-              <div class="text">минут</div>
-              <div class="count minutes"><span>0</span><span>9</span></div>
-            </div>
-            <div class="timer_item">
-              <div class="text">секунд</div>
-              <div class="count seconds"><span>3</span><span>9</span></div>
-            </div>
-          </div>
-        </div> -->
+
         <div class="image_block">
           <img
             class="offer_image"
             src="img/offer_image.jpg"
-            alt="Мясорубка  Meat Grinder"
+            alt="Мясорубка Meat Grinder"
           />
           <div class="discount_block">
             <div class="value">53%</div>
@@ -824,13 +346,6 @@ console.log(target.tagName);
           </div>
         </div>
 
-        <!-- <form
-          id="order_form"
-          class="order_form"
-          action="zakaz.php"
-          method="post"
-          onsubmit="if(this.name.value==''){alert('Введите Ваше имя!');return false}if(this.phone.value==''){alert('Введите Ваш номер телефона!');return false}return true;"
-        > -->
         <form
           id="order_form"
           class="order_form"
@@ -854,33 +369,10 @@ console.log(target.tagName);
             placeholder="Ваш телефон"
           />
 
-          <!-- <button class="button popup-link">Купить</button> -->
           <a href="#popup_2" class="button popup-link">Купить</a>
-          <input type="hidden" name="s1" value="798" />
-          <input type="hidden" name="s2" value="1207" />
-          <input type="hidden" name="uid" value="QaGes4627Y01" />
-          <input type="hidden" name="utm_source" value="" />
-          <input type="hidden" name="utm_medium" value="" />
-          <input type="hidden" name="utm_term" value="" />
-          <input type="hidden" name="utm_content" value="" />
-          <input type="hidden" name="utm_campaign" value="" />
-          <input
-            type="hidden"
-            name="server_name"
-            value="myasor.neupusti-ua.space"
-          />
-          <input type="hidden" name="php_self" value="/index.php" />
-          <input type="hidden" name="additional" value="" />
-          <input type="hidden" name="office" value="24" />
-          <input type="hidden" name="delivery" value="1" />
-          <input type="hidden" name="payment" value="4" />
         </form>
         <div class="products_count">Осталось<b>7</b>по акции</div>
       </section>
-
-      <!-- /order 3 -->
-
-      <!-- footer -->
 
       <footer class="footer_section">
         <div style="font-size: 13px">
@@ -903,8 +395,6 @@ console.log(target.tagName);
           </p>
         </div>
       </footer>
-
-      <!-- /footer -->
     </div>
     <div id="popup_2" class="popup">
       <div class="popup__body">
@@ -916,51 +406,13 @@ console.log(target.tagName);
         </div>
       </div>
     </div>
-    <!-- scripts -->
-    <link rel="stylesheet" type="text/css" href="9jkidi6t.css" />
-    <script src="lwfzhql0.js" type="text/javascript"></script>
 
-    <script src="nlpkttvp.js"></script>
-    <style type="text/css">
-      .youtube {
-        background-color: #000;
-        max-width: 100%;
-        height: inherit;
-        overflow: hidden;
-        position: relative;
-        cursor: hand;
-        cursor: pointer;
-      }
-      .youtube .thumb {
-        bottom: 0;
-        display: block;
-        left: 0;
-        margin: auto;
-        max-width: 100%;
-        position: absolute;
-        right: 0;
-        top: 0;
-        width: 100%;
-        height: auto;
-      }
-      .youtube .play {
-        filter: alpha(opacity=80);
-        opacity: 0.8;
-        height: 77px;
-        left: 50%;
-        margin-left: -38px;
-        margin-top: -38px;
-        position: absolute;
-        top: 50%;
-        width: 77px;
-        background: url('2dpjktvb.png') no-repeat;
-      }
-    </style>
-    <script src="qcfhg-1u.js"></script>
-    <script src="juv6fsqb.js"></script>
+    <!-- scripts -->
+    <script src="js/jquery.js"></script>
+    <script src="js/owl-carousel.js"></script>
+    <script src="js/jquery-plugins.js"></script>
     <script src="js/animate.js"></script>
     <script src="js/popups.js"></script>
-
     <!-- /scripts -->
   </body>
 </html>

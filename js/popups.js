@@ -99,7 +99,6 @@ document.addEventListener('keydown', function (e) {
     popupClose(popupActive)
   }
 })
-
 ;(function () {
   // проверяем поддержку
   if (!Element.prototype.closest) {
